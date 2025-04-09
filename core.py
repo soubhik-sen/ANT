@@ -59,7 +59,11 @@ class ACO:
 
             for ant in range(self.ants):
                 truck = self.trucks[ant]
-                available_orders = sorted(self.orders, key=lambda o: haversine_distance(truck.location, o.first_stop))
+                # available_orders = sorted(self.orders, key=lambda o: haversine_distance(truck.location, o.first_stop))
+                sorted_orders = sorted(self.orders, key=lambda o: haversine_distance(truck.location, o.first_stop))
+                top_n = sorted_orders[:5]
+                random.shuffle(top_n)
+                available_orders = top_n + sorted_orders[5:]
                 assignment = []
                 total_cost = 0
 
